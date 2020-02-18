@@ -1,0 +1,31 @@
+// var webdriver = require('selenium-webdriver');
+// var driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
+// var test = require('selenium-webdriver/testing');
+// driver.get('http://192.168.43.228:3000');
+
+// function getop () 
+// {
+//     return driver.wait(webdriver.until.elementLocated(webdriver.By.id('quizApptitle')),5000).then(el => {return el.getText()}).catch(err => {
+//         return err;
+//     })}
+
+// console.log(getop())
+// driver.sleep(5000);
+// driver.quit()
+
+
+//require('chromedriver');
+
+
+
+
+//const binary = new firefox.Binary();
+//driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+/*async function main() {
+    await driver.get('https://www.google.com');
+    await driver.sleep(10000);
+    await driver.quit();
+}
+main();*/
+//var service = new chrome.ServiceBuilder(path).build();
+//chrome.setDefaultService(service);
