@@ -255,7 +255,10 @@ describe('Register NEW user with non-existing name', function () {
       before(async function () {
           this.timeout(30000);
           //driver = await new Builder().forBrowser('chrome').build();
-          driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+          //driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+          var options = new firefox.Options();
+        options.addArguments("-headless");
+        driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
           await driver.get(url);
       });
   
