@@ -5,7 +5,7 @@ const {Builder, Key, By, until,promise, Capabilities} = require('selenium-webdri
 var firefox = require('selenium-webdriver/firefox');
 var path = '/home/sachmo/chromedriver';
 promise.USE_PROMISE_MANAGER = false;
-var url = "http://192.168.137.1:3000/"
+var url = "http://172.28.1.2:3000/"
 
 describe('Open and Test Quiz App with CORRECT LOGIN', function () {
   let driver;
@@ -14,7 +14,9 @@ describe('Open and Test Quiz App with CORRECT LOGIN', function () {
     before(async function () {
         this.timeout(30000);
         //driver = await new Builder().forBrowser('chrome').build();
-        driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+        var options = new firefox.Options();
+        options.addArguments("-headless");
+        driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
         await driver.get(url);
     });
 
@@ -50,7 +52,7 @@ describe('Open and Test Quiz App with CORRECT LOGIN', function () {
     it('enter correct login details',async function() {
         this.timeout(10000);
         await driver.findElement(By.id('username')).sendKeys('sachmo');
-        await driver.findElement(By.id('password')).sendKeys('sachmoadi1-');
+        await driver.findElement(By.id('password')).sendKeys('sachipo');
         await driver.findElement(By.id('signinButton')).click();
         try{
         var text = await driver.wait(until.elementLocated(By.id('welcomeMsg')),5000).then(el => {return el.getText()});
@@ -73,7 +75,9 @@ describe('Open and Test Quiz App with INCORRECT CRED', function () {
       before(async function () {
           this.timeout(30000);
           //driver = await new Builder().forBrowser('chrome').build();
-          driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+          var options = new firefox.Options();
+        options.addArguments("-headless");
+        driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
           await driver.get(url);
       });
   
@@ -105,7 +109,9 @@ describe('Register NEW user with non-existing name', function () {
       before(async function () {
           this.timeout(30000);
           //driver = await new Builder().forBrowser('chrome').build();
-          driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+          var options = new firefox.Options();
+        options.addArguments("-headless");
+        driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
           await driver.get(url);
       });
   
@@ -191,7 +197,9 @@ describe('Register NEW user with non-existing name', function () {
       before(async function () {
           this.timeout(30000);
           //driver = await new Builder().forBrowser('chrome').build();
-          driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+          var options = new firefox.Options();
+        options.addArguments("-headless");
+        driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
           await driver.get(url);
       });
   

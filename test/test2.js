@@ -4,7 +4,7 @@ const {Builder, Key, By, until,promise, Capabilities} = require('selenium-webdri
 var firefox = require('selenium-webdriver/firefox');
 var path = '/home/sachmo/chromedriver';
 promise.USE_PROMISE_MANAGER = false;
-var url = "http://192.168.137.1:3000/"
+var url = "http://172.28.1.2:3000/"
 
 describe('URL BYPASSING CHECKS', async function() {
     let driver;
