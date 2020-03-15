@@ -4,9 +4,9 @@ const {Builder, Key, By, until,promise, Capabilities} = require('selenium-webdri
 var firefox = require('selenium-webdriver/firefox');
 var path = '/home/sachmo/chromedriver';
 promise.USE_PROMISE_MANAGER = false;
-var url = "http://192.168.137.1:3000/"
+var url = "http://172.28.1.2:3000/"
 
-describe('URL BYPASSING CHECKS', async function() {
+describe('URL BYPASSING CHECKS', function() {
     let driver;
 
 
@@ -14,9 +14,65 @@ describe('URL BYPASSING CHECKS', async function() {
         this.timeout(30000);
         //driver = await new Builder().forBrowser('chrome').build();
         driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
-        await driver.get(url);
+        //await driver.get(url);
     });
 
-it('access dashboard without logging in')
+it('deny access dashboard without logging in',async function() {
+    this.timeout(30000);
+    await driver.get(url+'dashboard');
+    await driver.wait(until.elementLocated(By.className('jumbotron text-center'))).then(el => {return el});
+    let temp = await driver.findElement(By.className('btn btn-lg btn-primary')).then(el => {return el.getText();});
+    console.log(temp);
+    if(temp == "Please Login "){
+        assert.ok(true);
+    }else {
+        assert.ok(false);
+    }
+});
+    after(function(){this.timeout(3000);driver.quit();assert.ok(true)});
 
 });
+
+describe('Testing with very long inputs and extended ascii characters', function() {
+    let driver;
+
+    before(async function () {
+        this.timeout(30000);
+        //driver = await new Builder().forBrowser('chrome').build();
+        driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+        //await driver.get(url);
+    });
+
+    it('testing login with 256 char input',async function() {
+        this.timeout(30000);
+        var input = 'abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab'
+        await driver.get(url);
+        await driver.findElement(By.id('username')).sendKeys(input);
+        await driver.findElement(By.id('password')).sendKeys(input);
+        await driver.findElement(By.id('signinButton')).click();
+        try{
+        var text = await driver.wait(until.elementIsVisible(driver.findElement(By.id('NoUserErrorMsg')))).then(el => {return el.getText()});
+        console.log(text);
+        assert.equal(text,'User doesn\'t exist or Wrong Password');
+        }
+        catch(err){
+            console.log(err);
+            assert.ok(false);
+        }
+    });
+    after(async function(){this.timeout(5000);await driver.quit();assert.ok(true)});
+});
+
+describe('test inner components - Take Test, Logout, NavBar', function() {
+
+    let driver;
+
+    before(async function () {
+        this.timeout(30000);
+        //driver = await new Builder().forBrowser('chrome').build();
+        driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+        //await driver.get(url);
+    });
+
+
+})

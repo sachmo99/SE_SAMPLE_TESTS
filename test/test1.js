@@ -5,7 +5,7 @@ const {Builder, Key, By, until,promise, Capabilities} = require('selenium-webdri
 var firefox = require('selenium-webdriver/firefox');
 var path = '/home/sachmo/chromedriver';
 promise.USE_PROMISE_MANAGER = false;
-var url = "http://192.168.137.1:3000/"
+var url = "http://172.28.1.2:3000/"
 
 describe('Open and Test Quiz App with CORRECT LOGIN', function () {
   let driver;
@@ -50,7 +50,7 @@ describe('Open and Test Quiz App with CORRECT LOGIN', function () {
     it('enter correct login details',async function() {
         this.timeout(10000);
         await driver.findElement(By.id('username')).sendKeys('sachmo');
-        await driver.findElement(By.id('password')).sendKeys('sachmoadi1-');
+        await driver.findElement(By.id('password')).sendKeys('sachipo');
         await driver.findElement(By.id('signinButton')).click();
         try{
         var text = await driver.wait(until.elementLocated(By.id('welcomeMsg')),5000).then(el => {return el.getText()});
@@ -159,6 +159,41 @@ describe('Register NEW user with non-existing name', function () {
             await driver.findElement(By.id('rollNo')).sendKeys('CB.EN.U4CSE17160');
             await driver.findElement(By.id('phoneNo')).sendKeys('9764318552');
             await driver.findElement(By.id('password')).sendKeys('sachmoadi1-');
+            await driver.sleep(3000);
+            await driver.findElement(By.id('registerButton')).click();
+            await driver.sleep(3000);
+            
+            //let text = await driver.switchTo().alert().then(el => {console.log(el.getText());return el});
+            console.log("username generated:",username);
+            //text.accept();
+            await driver.sleep(2000);
+            var temp = await driver.findElements(By.id('signinCard')).then(el => {return el});
+            console.log(temp)
+            if(temp.length >=1){
+                assert.ok(true);
+            }
+            //console.log(text.getText());
+            else {
+                assert.ok(false);
+            }
+        }
+        catch(err){
+            console.log(err);
+            assert.ok(false);
+        }
+    });
+    it('entering null keys into register form', async function() {
+        this.timeout(30000);
+        var temp;
+        try {
+            await driver.wait(until.elementLocated((By.id('toSignupPageButton'))),10000);
+            await driver.findElement(By.id('toSignupPageButton')).click();
+            let username = Math.random().toString(36).substring(7);
+            await driver.findElement(By.id('username')).sendKeys(username);
+            await driver.findElement(By.id('email')).sendKeys('');
+            await driver.findElement(By.id('rollNo')).sendKeys('');
+            await driver.findElement(By.id('phoneNo')).sendKeys('');
+            await driver.findElement(By.id('password')).sendKeys('');
             await driver.sleep(3000);
             await driver.findElement(By.id('registerButton')).click();
             await driver.sleep(3000);
