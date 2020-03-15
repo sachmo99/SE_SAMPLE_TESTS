@@ -5,7 +5,7 @@ const {Builder, Key, By, until,promise, Capabilities} = require('selenium-webdri
 var firefox = require('selenium-webdriver/firefox');
 var path = '/home/sachmo/chromedriver';
 promise.USE_PROMISE_MANAGER = false;
-var url = "http://172.28.1.2:3000/"
+var url = "http://sachmo99.github.io/sequizapp"
 
 describe('Open and Test Quiz App with CORRECT LOGIN', function () {
   let driver;
@@ -14,7 +14,9 @@ describe('Open and Test Quiz App with CORRECT LOGIN', function () {
     before(async function () {
         this.timeout(30000);
         //driver = await new Builder().forBrowser('chrome').build();
-        driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+        var options = new firefox.Options();
+        options.addArguments("-headless");
+        driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
         await driver.get(url);
     });
 
@@ -73,7 +75,9 @@ describe('Open and Test Quiz App with INCORRECT CRED', function () {
       before(async function () {
           this.timeout(30000);
           //driver = await new Builder().forBrowser('chrome').build();
-          driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+          var options = new firefox.Options();
+        options.addArguments("-headless");
+        driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
           await driver.get(url);
       });
   
@@ -105,7 +109,9 @@ describe('Register NEW user with non-existing name', function () {
       before(async function () {
           this.timeout(30000);
           //driver = await new Builder().forBrowser('chrome').build();
-          driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+          var options = new firefox.Options();
+        options.addArguments("-headless");
+        driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
           await driver.get(url);
       });
   
@@ -226,7 +232,9 @@ describe('Register NEW user with non-existing name', function () {
       before(async function () {
           this.timeout(30000);
           //driver = await new Builder().forBrowser('chrome').build();
-          driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+          var options = new firefox.Options();
+        options.addArguments("-headless");
+        driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
           await driver.get(url);
       });
   
@@ -282,7 +290,10 @@ describe('Register NEW user with non-existing name', function () {
       before(async function () {
           this.timeout(30000);
           //driver = await new Builder().forBrowser('chrome').build();
-          driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+          //driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
+          var options = new firefox.Options();
+        options.addArguments("-headless");
+        driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
           await driver.get(url);
       });
   

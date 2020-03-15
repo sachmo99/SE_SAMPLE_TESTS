@@ -4,7 +4,7 @@ const {Builder, Key, By, until,promise, Capabilities} = require('selenium-webdri
 var firefox = require('selenium-webdriver/firefox');
 var path = '/home/sachmo/chromedriver';
 promise.USE_PROMISE_MANAGER = false;
-var url = "http://172.28.1.2:3000/"
+var url = "http://sachmo99.github.io/sequizapp"
 
 describe('URL BYPASSING CHECKS', function() {
     let driver;
@@ -19,7 +19,7 @@ describe('URL BYPASSING CHECKS', function() {
 
 it('deny access dashboard without logging in',async function() {
     this.timeout(30000);
-    await driver.get(url+'dashboard');
+    await driver.get(url+'/#/dashboard');
     await driver.wait(until.elementLocated(By.className('jumbotron text-center'))).then(el => {return el});
     let temp = await driver.findElement(By.className('btn btn-lg btn-primary')).then(el => {return el.getText();});
     console.log(temp);
@@ -63,16 +63,3 @@ describe('Testing with very long inputs and extended ascii characters', function
     after(async function(){this.timeout(5000);await driver.quit();assert.ok(true)});
 });
 
-describe('test inner components - Take Test, Logout, NavBar', function() {
-
-    let driver;
-
-    before(async function () {
-        this.timeout(30000);
-        //driver = await new Builder().forBrowser('chrome').build();
-        driver = new Builder().forBrowser('firefox').setFirefoxOptions().build();
-        //await driver.get(url);
-    });
-
-
-})
