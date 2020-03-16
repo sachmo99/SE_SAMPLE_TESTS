@@ -31,7 +31,7 @@ it('deny access dashboard without logging in',async function() {
         assert.ok(false);
     }
 });
-    after(function(){this.timeout(3000);driver.quit();assert.ok(true)});
+    after(function(){this.timeout(15000);driver.quit();assert.ok(true)});
 
 });
 
@@ -64,6 +64,6 @@ describe('Testing with very long inputs and extended ascii characters', function
             assert.ok(false);
         }
     });
-    after(async function(){this.timeout(5000);await driver.quit();assert.ok(true)});
+    after(async function(){this.timeout(15000);await driver.quit();assert.ok(true)});
 });
 
